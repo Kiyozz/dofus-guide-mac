@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --color-primary: linear-gradient(90deg, #d4fa00 0%, #00fa4c 100%);
+        --color-success: linear-gradient(90deg, #00fa4c 0%, #00fa4c 100%);
+        --color-danger: linear-gradient(90deg, #fa0000 0%, #fa00a0 100%);
+        --color-secondary: #171717;
+    }
+
+    @font-face {
+        font-family: 'Lexend';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url('../fonts/Lexend-Regular.ttf') format('truetype');
+    }
+
+    .bg-blur {
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        background: rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(30px);
+    }
+}
