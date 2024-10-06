@@ -10,7 +10,7 @@ useHead({
 <template>
   <div>
     <AppHeader />
-    <main class="fixed top-0 ml-[20.5%] my-[4%] w-[77vw]">
+    <main class="fixed top-12 right-4 sm:left-28 md:left-72">
       <slot />
     </main>
     <AppFooter />

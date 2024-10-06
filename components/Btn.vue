@@ -3,41 +3,79 @@ const props = defineProps<{
   label?: string | undefined
   icon?: string | undefined
   href?: string | undefined
-  size?: 'sm' | 'md' | 'lg' | undefined
-  color?: 'primary' | 'secondary' | 'success' | 'danger' | undefined
+  size?: 'xs' | 'sm' | 'md' | 'lg' | undefined
+  color?: 'light' | 'primary' | 'secondary' | 'success' | 'danger' | undefined
+  iconOnly?: boolean | undefined
+  disabled?: boolean | undefined
+  variant?: 'outline' | 'solid' | undefined | 'soft'
 }>()
-
-const getClass = () => {
-  let classs = 'btn'
-  if (props.size) {
-    classs += ` btn-${props.size}`
-  } else {
-    classs += ' btn-md'
-  }
-  if (props.color) {
-    classs += ` btn-${props.color}`
-  } else {
-    classs += ' btn-secondary'
-  }
-  if (props.icon) {
-    classs += ' btn-with-icon'
-  }
-  return classs
+const svgContent = ref<string | null>(null)
+const checkIsSvg = () => {
+  return props.icon.endsWith('.svg')
 }
+
+// Vérifier si l'icône est un SVG en se basant sur l'extension
+watch(
+  () => props.icon,
+  async (newIcon) => {
+    if (newIcon && newIcon?.endsWith('.svg')) {
+      try {
+        const response = await fetch(newIcon)
+        if (response.ok) {
+          svgContent.value = await response.text() // On stocke le contenu du SVG
+        }
+      } catch (error) {
+        console.error('Erreur lors du chargement du SVG:', error)
+        svgContent.value = null
+      }
+    } else {
+      svgContent.value = null
+    }
+  },
+  { immediate: true }
+)
 </script>
 
 <template>
-  <RouterLink v-if="href" :to="href" :class="getClass()" active-class="active">
-    <span v-if="icon" class="btn-icon"><img :src="icon" alt="" /></span>
-    <span class="btn-text">{{ label }}</span>
+  <RouterLink
+    v-if="href"
+    :to="href"
+    :class="[
+      'btn',
+      `btn-${props.size || 'md'}`,
+      `btn-${props.color || 'secondary'}`,
+      { 'btn-with-icon': props.icon && !props.iconOnly, 'btn-icon-only': props.iconOnly },
+      `${props.variant ? `btn-${props.variant}` : ''}`
+    ]"
+    active-class="active"
+  >
+    <span v-if="icon && !checkIsSvg()" class="btn-icon">
+      <img :src="icon" alt="" />
+    </span>
+    <span v-else-if="icon && checkIsSvg()" v-html="svgContent" class="btn-icon" />
+    <span v-if="!iconOnly" class="btn-text">{{ label }}</span>
   </RouterLink>
-  <button v-else :class="getClass()">
-    <span v-if="icon" class="btn-icon"><img :src="icon" alt="" /></span>
-    <span class="btn-text">{{ label }}</span>
+  <button
+    v-else
+    :class="[
+      'btn',
+      `btn-${props.size || 'md'}`,
+      `btn-${props.color || 'secondary'}`,
+      { 'btn-with-icon': props.icon && !props.iconOnly, 'btn-icon-only': props.iconOnly },
+      `${props.variant ? `btn-${props.variant}` : ''}`
+    ]"
+    :disabled="disabled"
+  >
+    <span v-if="icon && !checkIsSvg()" class="btn-icon">
+      <img :src="icon" alt="" />
+    </span>
+    <span v-else-if="icon && checkIsSvg()" v-html="svgContent" class="btn-icon" />
+    <span v-if="!iconOnly" class="btn-text">{{ label }}</span>
   </button>
 </template>
 
 <style scoped lang="css">
+/* Base btn style */
 .btn {
   display: flex;
   align-items: center;
@@ -47,70 +85,164 @@ const getClass = () => {
   border-radius: 8px;
 }
 
+/* Size */
 .btn-md {
-  padding: 6px 8px;
-  font-size: 14px;
+  padding: 0.5rem;
+  font-size: 1rem;
 }
 
 .btn-sm {
-  padding: 4px 6px;
-  font-size: 12px;
+  padding: 0.25rem;
+  font-size: 0.75rem;
+}
+
+.btn-xs {
+  padding: 0.125rem;
+  font-size: 0.5rem;
 }
 
 .btn-lg {
-  padding: 8px 10px;
-  font-size: 16px;
+  padding: 0.5rem;
+  font-size: 1.25rem;
+}
+
+/* Color */
+.btn-secondary {
+  background: var(--color-bg-dark);
+  color: var(--color-light);
 }
 
 .btn-primary {
-  background: var(--color-primary);
-  color: #171717;
+  background: var(--color-bg-primary);
+  color: var(--color-secondary);
 }
 
-.btn-primary:hover {
-  background: #00fa4c;
-}
-
-.btn-secondary {
-  background: var(--color-secondary);
-  color: #fff;
-}
-
-.btn-secondary:hover {
-  background: var(--color-primary);
-  color: #171717;
+.btn-light {
+  background: var(--color-bg-light);
+  color: var(--color-secondary);
 }
 
 .btn-success {
   background: var(--color-success);
-  color: #171717;
-}
-
-.btn-success:hover {
-  background: #00fa4c;
+  color: var(--color-secondary);
 }
 
 .btn-danger {
   background: var(--color-danger);
-  color: #171717;
+  color: var(--color-secondary);
+}
+
+.btn-warning {
+  background: var(--color-warning);
+  color: var(--color-secondary);
+}
+
+/* Outline Variant */
+.btn-outline {
+  background: transparent;
+  color: var(--color-light);
+}
+
+.btn-outline.btn-primary:hover {
+  background: transparent;
+  color: var(--color-primary);
+}
+
+.btn-outline.btn-light:hover {
+  background: transparent;
+  color: var(--color-light);
+}
+
+.btn-outline.btn-success:hover {
+  background: transparent;
+  color: var(--color-success);
+}
+
+.btn-outline.btn-danger:hover {
+  background: transparent;
+  color: var(--color-danger);
+}
+
+.btn-outline.btn-secondary:hover {
+  background: transparent;
+  color: var(--color-primary);
+}
+
+.btn-outline.btn-warning:hover {
+  background: transparent;
+  color: var(--color-warning);
+}
+
+/* Solid Variant */
+
+.btn-solid {
+  background: var(--color-bg-primary);
+  color: var(--color-secondary);
+}
+
+/* Soft Variant */
+.btn-soft {
+  background: var(--color-bg-dark);
+  color: var(--color-secondary);
+}
+
+/* Icon */
+.btn-with-icon {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+.btn-icon img {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.btn-primary:hover {
+  background: var(--color-primary);
+  color: var(--color-secondary);
+}
+
+.btn-light:hover {
+  background: var(--color-light);
+  color: var(--color-secondary);
+}
+
+.btn-success:hover {
+  background: var(--color-success);
+  color: var(--color-secondary);
 }
 
 .btn-danger:hover {
-  background: #fa00a0;
+  background: var(--color-danger);
+  color: var(--color-secondary);
 }
 
-.btn-secondary.active {
-  background: var(--color-primary);
-  color: #171717;
+.btn-secondary:hover {
+  background: var(--color-bg-primary);
+  color: var(--color-secondary);
 }
 
-.btn-with-icon {
-  justify-content: start;
-  gap: 8px;
+.btn-warning:hover {
+  background: var(--color-warning);
+  color: var(--color-secondary);
 }
 
-.btn-with-icon .btn-icon {
-  width: 24px;
-  height: 24px;
+/* Disabled */
+.btn:disabled {
+  background: var(--color-bg-dark);
+  color: #777575;
+}
+
+.btn:disabled:hover {
+  background: var(--color-bg-dark);
+  color: #777575;
+  cursor: not-allowed;
+}
+
+/* Active */
+.active {
+  background: var(--color-bg-primary);
+  color: var(--color-secondary);
 }
 </style>

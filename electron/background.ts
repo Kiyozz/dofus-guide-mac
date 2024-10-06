@@ -20,7 +20,7 @@ const architucture: '64' | '32' = os.arch() === 'x64' ? '64' : '32'
 const headerSize = 32
 const modules = [titleBarActionsModule, macMenuModule, updaterModule]
 
-function openGuideWindow() {
+function openGuideWindow(top = 300, left = 0.5, opacity = 0.9) {
   const guideWindow = new BrowserWindow({
     width: 340,
     height: 600,
@@ -34,7 +34,8 @@ function openGuideWindow() {
       contextIsolation: true
     }
   })
-
+  guideWindow.setOpacity(opacity)
+  guideWindow.setPosition(left, top)
   dynamicRenderer(guideWindow, 'tutoriel')
 }
 
@@ -121,8 +122,8 @@ app.on('window-all-closed', () => {
   }
 })
 
-ipcMain.on('open-modal', () => {
-  openGuideWindow()
+ipcMain.on('open-modal', (top: number, left: number, opacity: number) => {
+  openGuideWindow(top, left, opacity)
 })
 
 ipcMain.handle(

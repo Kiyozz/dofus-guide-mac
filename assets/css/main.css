@@ -4,10 +4,18 @@
 
 @layer base {
     :root {
-        --color-primary: linear-gradient(90deg, #d4fa00 0%, #00fa4c 100%);
-        --color-success: linear-gradient(90deg, #00fa4c 0%, #00fa4c 100%);
-        --color-danger: linear-gradient(90deg, #fa0000 0%, #fa00a0 100%);
+        --color-primary: #00fa4c;
         --color-secondary: #171717;
+        --color-success: #00fa4c;
+        --color-danger: #fa0000;
+        --color-warning: #faa000;
+        --color-light: #f8f8f8;
+        --color-bg-primary: linear-gradient(90deg, #d4fa00 0%, #00fa4c 100%);
+        --color-bg-success: linear-gradient(90deg, #00fa4c 0%, #00fa4c 100%);
+        --color-bg-danger: linear-gradient(90deg, #fa0000 0%, #fa00a0 100%);
+        --color-bg-warning: linear-gradient(90deg, #faa000 0%, #faa000 100%);
+        --color-bg-light: var(--color-light);
+        --color-bg-dark: var(--color-secondary);
     }
 
     @font-face {
