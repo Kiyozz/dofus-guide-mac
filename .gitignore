@@ -18,6 +18,8 @@ dist/
 electron/dist/
 build/
 out/
+.output/
+electron-dist/
 
 # Build directories
 build/
