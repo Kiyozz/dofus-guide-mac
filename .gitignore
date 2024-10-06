@@ -1,0 +1,79 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency directories
+node_modules/
+.pnp/
+.pnp.js
+
+# Nuxt build output
+.nuxt/
+dist/
+
+# Electron build output
+electron/dist/
+build/
+out/
+
+# Build directories
+build/
+out/
+temp/
+.tmp/
+
+# Static files cache (Nuxt)
+static/cache/
+public/cache/
+
+# IDE files
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# JetBrains WebStorm
+.idea/
+# WebStorm settings folder
+.idea/
+# User-specific stuff
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/dictionaries
+.idea/**/vcs.xml
+.idea/jsLibraryMappings.xml
+
+# ViteJS cache (if using Vite with Nuxt)
+.vite/
+
+# Coverage directory used by testing tools
+coverage/
+*.lcov
+
+# dotenv environment variable files
+.env
+.env.local
+.env.*.local
+
+# Lock files
+package-lock.json
+yarn.lock
+
+# MacOS files
+.DS_Store
+
+# Editor directories and files
+.vscode/
+*.code-workspace
+*.iml
+
+# Other temporary files
+npm-debug.log*
+yarn-debug.log*
+.pnpm-debug.log*
+Dofus Guide/
