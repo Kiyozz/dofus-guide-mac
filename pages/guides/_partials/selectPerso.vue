@@ -34,7 +34,7 @@ const submitPerso = async () => {
   const response = await window.electronAPI.prismaOperation('player', 'create', {
     data: {
       guideId: props.guideId,
-      name: formPseudo.value,
+      pseudo: formPseudo.value,
       gender: formGender.value ? 'female' : 'male',
       classe: classeForm.value,
       lastEtape: 1

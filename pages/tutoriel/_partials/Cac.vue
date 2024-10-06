@@ -33,11 +33,9 @@ const toggleCheckbox = async () => {
   } else {
     await window.electronAPI.prismaOperation('cac', 'delete', {
       where: {
-        playerId_guideId_cacId: {
-          playerId: props.userId,
-          guideId: props.guideId,
-          cacId: props.cacId
-        }
+        playerId: props.userId,
+        guideId: props.guideId,
+        cacId: props.cacId
       }
     })
   }

@@ -57,10 +57,16 @@ const action = (type: string) => {
         </div>
       </div>
     </div>
-    <div class="inline-flex py-[8px] px-[16px] gap-[10px] bg-blur">
-      <UIcon name="i-hugeicons-minus-sign" size="24" @click="action('minusWindow')" class="cursor-pointer" />
-      <UIcon name="i-material-symbols-light-rectangle-outline" size="24" @click="action('maxWindow')" class="cursor-pointer" />
-      <UIcon name="i-hugeicons-cancel-01" size="24" @click="action('closeWindow')" class="cursor-pointer" />
+    <div class="flex align-middle py-[8px] px-[16px] gap-[10px] bg-blur">
+      <button @click="action('minusWindow')" class="text-white">
+        <UIcon name="i-hugeicons-minus-sign" size="24" />
+      </button>
+      <button @click="action('maxWindow')" class="text-white">
+        <UIcon name="i-material-symbols-light-rectangle-outline" size="24" />
+      </button>
+      <button @click="action('closeWindow')" class="text-white">
+        <UIcon name="i-hugeicons-cancel-01" size="24" />
+      </button>
     </div>
   </div>
 </template>
