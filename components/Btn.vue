@@ -182,8 +182,45 @@ watch(
 
 /* Soft Variant */
 .btn-soft {
-  background: var(--color-bg-dark);
-  color: var(--color-secondary);
+  background: transparent;
+  border: solid 1px var(--color-bg-light);
+  color: var(--color-bg-light);
+}
+
+.btn-soft.btn-primary:hover {
+  background: transparent;
+  color: var(--color-primary);
+  border: solid 1px var(--color-primary);
+}
+
+.btn-soft.btn-light:hover {
+  background: transparent;
+  color: var(--color-light);
+  border: solid 1px var(--color-light);
+}
+
+.btn-soft.btn-success:hover {
+  background: transparent;
+  color: var(--color-success);
+  border: solid 1px var(--color-success);
+}
+
+.btn-soft.btn-danger:hover {
+  background: transparent;
+  color: var(--color-danger);
+  border: solid 1px var(--color-danger);
+}
+
+.btn-soft.btn-secondary:hover {
+  background: transparent;
+  color: var(--color-primary);
+  border: solid 1px var(--color-primary);
+}
+
+.btn-soft.btn-warning:hover {
+  background: transparent;
+  color: var(--color-warning);
+  border: solid 1px var(--color-warning);
 }
 
 /* Icon */

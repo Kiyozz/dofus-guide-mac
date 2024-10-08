@@ -17,7 +17,7 @@ const createPerso = reactive({
 })
 
 const topGuide = ref(300)
-const leftGuide = ref(0.5)
+const leftGuide = ref(1)
 const opacityGuide = ref(100)
 const classes = await $fetch('https://dofusguide.fr/api/players')
 const getGender = computed(() => (createPerso.gender ? 'Féminin' : 'Masculin'))
@@ -72,7 +72,7 @@ const openGuide = () => {
   window.localStorage.setItem('guideId', selectedGuide.value)
   window.localStorage.setItem('userId', selectedPerso.value)
   window.localStorage.setItem('lastEtape', user.lastEtape)
-  window.electronAPI.openModal(topGuide.value, leftGuide.value, (opacityGuide.value / 100).toFixed(1))
+  window.electronAPI.openModal(topGuide.value, leftGuide.value, opacityGuide.value / 100)
 }
 </script>
 
@@ -106,10 +106,11 @@ const openGuide = () => {
             <label for="leftGuide">Left</label>
             <input type="number" v-model="leftGuide" id="leftGuide" class="w-full px-1.5 py-1 bg-gray-800 text-gray-200 rounded-full my-2" />
           </div>
+          <!--
           <div class="flex gap-2 items-center">
             <label for="opacityGuide">Opacity</label>
             <input type="number" v-model="opacityGuide" id="opacityGuide" class="w-full px-1.5 py-1 bg-gray-800 text-gray-200 rounded-full my-2" />
-          </div>
+          </div>-->
         </div>
       </Container>
     </div>

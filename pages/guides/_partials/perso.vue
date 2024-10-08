@@ -13,13 +13,13 @@ const getImg = () => {
 </script>
 
 <template>
-  <div class="flex items-center justify-between p-1 rounded-lg bg-[#171717] cursor-pointer" :class="selectedPerso == user.id ? 'active' : ''">
+  <button class="flex items-center justify-between p-1 rounded-lg bg-[#171717] w-full" :class="selectedPerso == user.id ? 'active' : ''">
     <div class="img_container">
       <img :src="getImg()" alt="" class="img" />
     </div>
     <div class="text-sm font-medium flex-1 ms-8">{{ user.pseudo }}</div>
     <btn size="xs" icon="/img/svg/close.svg" variant="outline" color="danger" @click="onDelete(user.id)" />
-  </div>
+  </button>
 </template>
 
 <style scoped>

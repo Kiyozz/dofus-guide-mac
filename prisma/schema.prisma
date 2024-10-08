@@ -9,7 +9,7 @@ datasource db {
 
 model Player {
   id        Int    @id @default(autoincrement())
-  pseudo      String
+  pseudo    String
   classe    Int
   gender    String
   guideId   Int
@@ -21,4 +21,9 @@ model Cac {
   cacId    String @unique
   guideId  Int
   playerId Int
+}
+
+model ocre {
+  id  Int @id
+  qte Int
 }

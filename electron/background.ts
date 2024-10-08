@@ -1,6 +1,6 @@
 import * as path from 'path'
 import * as os from 'os'
-import { app, BrowserWindow, ipcMain, session } from 'electron'
+import { app, BrowserWindow, ipcMain, session, screen } from 'electron'
 import { PrismaClient } from '@prisma/client'
 import singleInstance from './singleInstance'
 import dynamicRenderer from './dynamicRenderer'
@@ -20,10 +20,13 @@ const architucture: '64' | '32' = os.arch() === 'x64' ? '64' : '32'
 const headerSize = 32
 const modules = [titleBarActionsModule, macMenuModule, updaterModule]
 
-function openGuideWindow(top = 300, left = 0.5, opacity = 0.9) {
+function openGuideWindow(y: number, x: number, opacity: number) {
   const guideWindow = new BrowserWindow({
     width: 340,
     height: 600,
+    x,
+    y,
+    opacity,
     titleBarOverlay: true,
     autoHideMenuBar: true,
     resizable: false,
@@ -34,8 +37,6 @@ function openGuideWindow(top = 300, left = 0.5, opacity = 0.9) {
       contextIsolation: true
     }
   })
-  guideWindow.setOpacity(opacity)
-  guideWindow.setPosition(left, top)
   dynamicRenderer(guideWindow, 'tutoriel')
 }
 
@@ -122,8 +123,9 @@ app.on('window-all-closed', () => {
   }
 })
 
-ipcMain.on('open-modal', (top: number, left: number, opacity: number) => {
-  openGuideWindow(top, left, opacity)
+ipcMain.on('open-modal', (_, { top, left, opacity }) => {
+  // Vérifie les types des arguments et applique des valeurs par défaut si nécessaire
+  openGuideWindow(typeof top === 'number' ? top : 300, typeof left === 'number' ? left : 0.5, typeof opacity === 'number' ? opacity : 0.9)
 })
 
 ipcMain.handle(

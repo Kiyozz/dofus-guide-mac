@@ -3,8 +3,8 @@ const tabs = ref('tuto')
 const urls = {
   tuto: 'https://dofusguide.fr/stuff',
   huz: 'https://www.huzounet.fr/equipments',
-  dofusbook: 'https://www.dofusbook.net/fr/'
 }
+
 const onIframeLoad = () => {
   if (tabs.value === 'huz') {
     const iframe = document.getElementById('iframe')
@@ -27,7 +27,9 @@ const onIframeLoad = () => {
         <div><img src="https://www.huzounet.fr/_next/static/media/logo-huzounet.eeafcdfb.png" alt="" class="h-[25px]" /> </div>
         <div>Huz</div>
       </button>
+<!--
       <button class="py-2 px-3 rounded-tr-lg" :class="tabs == 'dofusbook' ? 'bg-gray-900  shadow-2xl  text-white' : 'bg-gray-400'" @click="tabs = 'dofusbook'">Dofus Book </button>
+-->
     </div>
     <div class="bg-gray-900 h-[85vh] w-full">
       <iframe id="iframe" :src="urls[tabs]" class="w-full h-full" @load="onIframeLoad"></iframe>

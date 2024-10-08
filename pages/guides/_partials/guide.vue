@@ -25,7 +25,7 @@ const getImg = (guide: string) => {
 
 <template>
   <div>
-    <div class="flex card gap-2 rounded-lg items-center cursor-pointer" :class="selectedGuide === tuto.id ? 'active' : ''">
+    <button class="flex card gap-2 rounded-lg items-center cursor-pointer w-full" :class="selectedGuide === tuto.id ? 'outline outline-2 outline-green-500' : ''">
       <div class="maks">
         <img :src="getImg(tuto.image)" alt="" class="rounded-l-lg" />
       </div>
@@ -35,7 +35,7 @@ const getImg = (guide: string) => {
       <div class="py-2 px-4">
         <btn size="xs" icon="/img/svg/add.svg" :color="selectedGuide === tuto.id ? 'primary' : 'secondary'" icon-only :disabled="selectedGuide !== tuto.id" @click="onClickBtn()" />
       </div>
-    </div>
+    </button>
   </div>
 </template>
 
@@ -56,10 +56,5 @@ const getImg = (guide: string) => {
   font-style: normal;
   font-weight: 300;
   line-height: normal;
-}
-
-.active {
-  border: 2px solid #00fa4c;
-  border-radius: 8px;
 }
 </style>
