@@ -17,7 +17,8 @@
     "build:electron": "yarn build && yarn transpile-electron && node build.js",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
-    "prisma:db-push": "prisma db push"
+    "prisma:db-push": "prisma db push",
+    "build:mac:os": "yarn prisma:generate && yarn prisma:migrate && yarn prisma:db-push && yarn build:electron"
   },
   "devDependencies": {
     "@nuxt/ui": "^2.18.6",
