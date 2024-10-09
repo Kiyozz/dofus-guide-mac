@@ -3,13 +3,44 @@ const jobs = await $fetch('https://dofusguide.fr/api/jobs')
 
 const truncate = (text: string, length: number) => {
   if (text.toLowerCase().includes('bois')) {
-    text = text.replace('Bois de', '')
-    text = text.replace('Bois d\'', '')
+    text = text.replaceAll('Bois de', '')
+    text = text.replaceAll("Bois d'", '')
   }
   if (text.length > length) {
     return text.slice(0, length) + '...'
   }
   return text
+}
+
+const normalize = (text: string) => {
+  text = text.replaceAll('é', 'e')
+  text = text.replaceAll('è', 'e')
+  text = text.replaceAll('ê', 'e')
+  text = text.replaceAll('à', 'a')
+  text = text.replaceAll('â', 'a')
+  text = text.replaceAll('ç', 'c')
+  text = text.replaceAll('î', 'i')
+  text = text.replaceAll('ô', 'o')
+  text = text.replaceAll('û', 'u')
+  text = text.replaceAll('ù', 'u')
+  text = text.replace("'", '')
+  return text
+}
+
+const openMap = (job: string, skill: string) => {
+  let j = normalize(job)
+  let s = normalize(skill)
+  if (s.toLowerCase().includes('bois')) {
+    s = s.replaceAll('Bois de', '')
+    s = s.replaceAll("Bois d'", '')
+  }
+  j = j.toUpperCase().replaceAll(' ', '')
+  s = s.toUpperCase().replaceAll(' ', '')
+  if (s.includes('5FEUILLES')) {
+    s = s.replaceAll('5FEUILLES', '5FEUILLE')
+  }
+  console.log(`jobs/${j}_${s}`)
+  window.electronAPI.openJobs(`jobs/${j}_${s}`)
 }
 </script>
 
@@ -24,7 +55,7 @@ const truncate = (text: string, length: number) => {
       </div>
       <div class="grid grid-cols-10 mt-7">
         <div v-for="s in job.skills">
-          <div class="flex flex-col items-center cursor-pointer">
+          <div class="flex flex-col items-center cursor-pointer" @click="openMap(job.name, s.name)">
             <div>
               <img :src="s.image" class="bg-[#171717]/40 w-[40px] p-1 rounded-lg" />
             </div>

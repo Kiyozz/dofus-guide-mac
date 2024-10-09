@@ -41,6 +41,22 @@ function openGuideWindow(y: number, x: number, opacity: number, url: string) {
   dynamicRenderer(guideWindow, url)
 }
 
+function openJobs(url: string) {
+  const guideWindow = new BrowserWindow({
+    width: 500,
+    height: 500,
+    titleBarOverlay: true,
+    autoHideMenuBar: true,
+    webPreferences: {
+      preload: preloadPath,
+      nodeIntegration: false,
+      webSecurity: false,
+      contextIsolation: true
+    }
+  })
+  dynamicRenderer(guideWindow, url)
+}
+
 // Initialize app window
 // =====================
 function createWindow() {
@@ -124,6 +140,11 @@ app.on('window-all-closed', () => {
 ipcMain.on('open-modal', (_, { top, left, opacity, url }) => {
   // Vérifie les types des arguments et applique des valeurs par défaut si nécessaire
   openGuideWindow(typeof top === 'number' ? top : 300, typeof left === 'number' ? left : 0.5, typeof opacity === 'number' ? opacity : 0.9, url)
+})
+
+ipcMain.on('open-jobs', (_, { url }) => {
+  // Vérifie les types des arguments et applique des valeurs par défaut si nécessaire
+  openJobs(url)
 })
 
 ipcMain.handle(

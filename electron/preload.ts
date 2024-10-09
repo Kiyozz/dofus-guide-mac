@@ -21,6 +21,10 @@ process.once('loaded', () => {
         opacity,
         url
       }),
+    openJobs: (url: string) =>
+      ipcRenderer.send('open-jobs', {
+        url
+      }),
     prismaOperation: (model: string, action: string, args: any) =>
       ipcRenderer.invoke('prisma-operation', {
         model,
