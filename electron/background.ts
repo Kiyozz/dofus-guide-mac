@@ -48,7 +48,6 @@ function createWindow() {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     autoHideMenuBar: true,
-    frame: platform !== 'darwin', // Masque le cadre uniquement si ce n'est pas macOS
     width: 1280,
     height: 800,
     backgroundColor: '#000',
@@ -59,10 +58,10 @@ function createWindow() {
       contextIsolation: true,
       nodeIntegration: false
     },
-    titleBarStyle: platform === 'darwin' ? 'hiddenInset' : 'default', // Utilise hiddenInset sur macOS
+    titleBarStyle: 'hiddenInset', // Utilise hiddenInset sur macOS
     titleBarOverlay: platform === 'darwin' ? { height: headerSize } : undefined, // Gère l'overlay de la barre de titre sur macOS
     title: 'Dofus Guide'
-  });
+  })
 
   // Lock app to single instance
   if (singleInstance(app, mainWindow)) return
