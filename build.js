@@ -31,7 +31,7 @@ const options = {
   buildDependenciesFromSource: false,
 
   directories: {
-    output: 'Dofus Guide'
+    output: 'dofus-guide'
   },
   win: {
     // eslint-disable-next-line no-template-curly-in-string
@@ -48,6 +48,7 @@ const options = {
   },
   mac: {
     category: 'com.humbrain.dofusguide',
+    icon: 'build/icons/icon.icns',
     hardenedRuntime: false,
     gatekeeperAssess: false,
     target: [

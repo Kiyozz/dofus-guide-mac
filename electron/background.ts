@@ -38,6 +38,7 @@ function openGuideWindow(y: number, x: number, opacity: number, url: string) {
       contextIsolation: true
     }
   })
+  guideWindow.setTitle('Dofus Guide')
   dynamicRenderer(guideWindow, url)
 }
 
@@ -54,6 +55,7 @@ function openJobs(url: string) {
       contextIsolation: true
     }
   })
+  guideWindow.setTitle('Dofus Guide - Jobs')
   dynamicRenderer(guideWindow, url)
 }
 
@@ -76,8 +78,9 @@ function createWindow() {
     },
     titleBarStyle: 'hiddenInset', // Utilise hiddenInset sur macOS
     titleBarOverlay: platform === 'darwin' ? { height: headerSize } : undefined, // Gère l'overlay de la barre de titre sur macOS
-    title: 'Dofus Guide'
   })
+
+  mainWindow.setTitle('Dofus Guide')
 
   // Lock app to single instance
   if (singleInstance(app, mainWindow)) return
