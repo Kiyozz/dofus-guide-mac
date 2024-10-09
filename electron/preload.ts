@@ -14,11 +14,12 @@ import { contextBridge, ipcRenderer } from 'electron'
 process.once('loaded', () => {
   console.log('preload.ts loaded')
   contextBridge.exposeInMainWorld('electronAPI', {
-    openModal: (top: number, left: number, opacity: number) =>
+    openModal: (top: number, left: number, opacity: number, url: string) =>
       ipcRenderer.send('open-modal', {
         top,
         left,
-        opacity
+        opacity,
+        url
       }),
     prismaOperation: (model: string, action: string, args: any) =>
       ipcRenderer.invoke('prisma-operation', {

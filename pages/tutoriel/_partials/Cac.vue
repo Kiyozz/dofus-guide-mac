@@ -2,10 +2,12 @@
 const props = defineProps({
   cacId: String,
   userId: Number,
-  guideId: Number
+  guideId: Number,
+  withoutDb: Boolean
 })
 
 const hasCac = async () => {
+  if (props.withoutDb) return
   const response = await window.electronAPI.prismaOperation('cac', 'findUnique', {
     where: {
       playerId: props.userId,
@@ -13,7 +15,6 @@ const hasCac = async () => {
       cacId: props.cacId?.toString()
     }
   })
-  console.log(response)
   if (response.success) hasCheckCache.value = response.data !== null
 }
 
@@ -21,13 +22,13 @@ const hasCheckCache = ref(false)
 const checkboxImg = ['/img/icon/checkbox_off.png', '/img/icon/checkbox_on.png']
 const toggleCheckbox = async () => {
   hasCheckCache.value = !hasCheckCache.value
-
+  if (props.withoutDb) return
   if (hasCheckCache.value) {
     await window.electronAPI.prismaOperation('cac', 'create', {
       data: {
         playerId: props.userId,
         guideId: props.guideId,
-        cacId: props.cacId
+        cacId: props.cacId?.toString()
       }
     })
   } else {
@@ -35,7 +36,7 @@ const toggleCheckbox = async () => {
       where: {
         playerId: props.userId,
         guideId: props.guideId,
-        cacId: props.cacId
+        cacId: props.cacId?.toString()
       }
     })
   }

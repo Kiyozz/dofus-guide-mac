@@ -29,6 +29,7 @@ onMounted(async () => {
 })
 const updatedGuide = async (id) => {
   selectedGuide.value = id
+  selectedPerso.value = 0
   const response = await window.electronAPI.prismaOperation('player', 'findMany', { where: { guideId: id } })
   if (response.success) {
     users.value = response.data
@@ -72,7 +73,7 @@ const openGuide = () => {
   window.localStorage.setItem('guideId', selectedGuide.value)
   window.localStorage.setItem('userId', selectedPerso.value)
   window.localStorage.setItem('lastEtape', user.lastEtape)
-  window.electronAPI.openModal(topGuide.value, leftGuide.value, opacityGuide.value / 100)
+  window.electronAPI.openModal(topGuide.value, leftGuide.value, opacityGuide.value / 100, 'tutoriel')
 }
 </script>
 

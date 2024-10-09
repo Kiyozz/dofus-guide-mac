@@ -7,6 +7,7 @@ import dynamicRenderer from './dynamicRenderer'
 import titleBarActionsModule from './modules/titleBarActions'
 import updaterModule from './modules/updater'
 import macMenuModule from './modules/macMenu'
+import * as url from 'node:url'
 
 const prisma = new PrismaClient()
 const preloadPath = path.join(__dirname, 'preload.js')
@@ -20,10 +21,10 @@ const architucture: '64' | '32' = os.arch() === 'x64' ? '64' : '32'
 const headerSize = 32
 const modules = [titleBarActionsModule, macMenuModule, updaterModule]
 
-function openGuideWindow(y: number, x: number, opacity: number) {
+function openGuideWindow(y: number, x: number, opacity: number, url: string) {
   const guideWindow = new BrowserWindow({
     width: 340,
-    height: 600,
+    height: 700,
     x,
     y,
     opacity,
@@ -37,7 +38,7 @@ function openGuideWindow(y: number, x: number, opacity: number) {
       contextIsolation: true
     }
   })
-  dynamicRenderer(guideWindow, 'tutoriel')
+  dynamicRenderer(guideWindow, url)
 }
 
 // Initialize app window
@@ -123,9 +124,9 @@ app.on('window-all-closed', () => {
   }
 })
 
-ipcMain.on('open-modal', (_, { top, left, opacity }) => {
+ipcMain.on('open-modal', (_, { top, left, opacity, url }) => {
   // Vérifie les types des arguments et applique des valeurs par défaut si nécessaire
-  openGuideWindow(typeof top === 'number' ? top : 300, typeof left === 'number' ? left : 0.5, typeof opacity === 'number' ? opacity : 0.9)
+  openGuideWindow(typeof top === 'number' ? top : 300, typeof left === 'number' ? left : 0.5, typeof opacity === 'number' ? opacity : 0.9, url)
 })
 
 ipcMain.handle(
