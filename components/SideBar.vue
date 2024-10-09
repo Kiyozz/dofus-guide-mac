@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <aside class="flex-col gap-[8px] m-[16px] max-w-[236px] min-h-[728px] p-[16px] bg-blur sm:hidden md:flex transition">
+  <aside class="flex-col gap-[8px] ml-[8px] mr-[16px] max-w-[236px] min-h-[728px] p-[16px] bg-blur sm:hidden md:flex transition fixed top-12">
     <RouterLink to="/">
       <img src="/img/dofus_logo.png" class="mx-auto w-1/2 mt-1" />
     </RouterLink>
