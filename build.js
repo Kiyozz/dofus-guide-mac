@@ -14,14 +14,14 @@ const options = {
   // schemes: ['deeplink']
   // },
   // - Electron auto-updater config
-  // publish: [
-  //   {
-  //     provider: 'github',
-  //     owner: 'eternalc0der',
-  //     repo: 'electron-nuxt3',
-  //     releaseType: 'release'
-  //   }
-  // ],
+  publish: [
+    {
+      provider: 'github',
+      owner: 'steodec',
+      repo: 'dofus-guide-mac',
+      releaseType: 'release'
+    }
+  ],
 
   // "store" | "normal" | "maximum" - For testing builds, use 'store' to reduce build time significantly.
   compression: 'maximum',
@@ -68,7 +68,7 @@ const options = {
   }
 }
 
-const platforms = ['WINDOWS']
+const platforms = ['MAC']
 
 platforms.forEach((platform) => {
   builder
