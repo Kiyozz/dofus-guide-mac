@@ -3,6 +3,7 @@
 export default defineNuxtConfig({
   modules: ['@nuxt/ui', '@davestewart/nuxt-scrollbar'],
   css: ['~/assets/css/main.css'],
+  srcDir: 'src/',
   prisma: {
     // Cette option fait en sorte que Prisma fonctionne uniquement côté serveur
     disableClientFetch: true

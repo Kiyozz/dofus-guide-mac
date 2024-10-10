@@ -23,22 +23,24 @@ const normalize = (text: string) => {
   text = text.replaceAll('ô', 'o')
   text = text.replaceAll('û', 'u')
   text = text.replaceAll('ù', 'u')
-  text = text.replace("'", '')
   return text
 }
 
 const openMap = (job: string, skill: string) => {
   let j = normalize(job)
   let s = normalize(skill)
+  console.log(s)
   if (s.toLowerCase().includes('bois')) {
     s = s.replaceAll('Bois de', '')
     s = s.replaceAll("Bois d'", '')
   }
+  console.log(s)
   j = j.toUpperCase().replaceAll(' ', '')
   s = s.toUpperCase().replaceAll(' ', '')
   if (s.includes('5FEUILLES')) {
     s = s.replaceAll('5FEUILLES', '5FEUILLE')
   }
+  s = s.replace("'", '')
   console.log(`jobs/${j}_${s}`)
   window.electronAPI.openJobs(`jobs/${j}_${s}`)
 }

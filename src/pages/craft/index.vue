@@ -110,7 +110,7 @@ const removeCraft = (c) => {
 
 const launch = (c = null) => {
   if (c) {
-    selectedCraft.value = [c]
+    selectedCraft.value = [{ ...c, qte: 1 }]
   }
   window.localStorage.setItem('crafts', JSON.stringify(selectedCraft.value))
   window.electronAPI.openModal(300, 1, 100, 'craft/todo')

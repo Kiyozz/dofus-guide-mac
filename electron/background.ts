@@ -1,13 +1,12 @@
 import * as path from 'path'
 import * as os from 'os'
-import { app, BrowserWindow, ipcMain, session, screen } from 'electron'
+import { app, BrowserWindow, ipcMain, session } from 'electron'
 import { PrismaClient } from '@prisma/client'
 import singleInstance from './singleInstance'
 import dynamicRenderer from './dynamicRenderer'
 import titleBarActionsModule from './modules/titleBarActions'
 import updaterModule from './modules/updater'
 import macMenuModule from './modules/macMenu'
-import * as url from 'node:url'
 
 const prisma = new PrismaClient()
 const preloadPath = path.join(__dirname, 'preload.js')
@@ -88,7 +87,7 @@ function createWindow() {
   // Open the DevTools.
   !isProduction &&
     mainWindow.webContents.openDevTools({
-      mode: 'bottom'
+      mode: 'detach'
     })
 
   return mainWindow
