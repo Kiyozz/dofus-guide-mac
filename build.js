@@ -48,9 +48,10 @@ const options = {
   },
   mac: {
     category: 'com.humbrain.dofusguide',
-    icon: 'build/icons/icon.icns',
+    icon: '.output/public/img/icons/icon.icns',
     hardenedRuntime: false,
     gatekeeperAssess: false,
+    identity: 'PAUL CHARLES PIERRE TEDESCO (9ZBRH92F53)',
     target: [
       {
         target: 'default',

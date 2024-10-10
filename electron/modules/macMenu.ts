@@ -3,19 +3,18 @@ import { app, BrowserWindow, Menu } from 'electron'
 // Helpers
 // =======
 const template: (Electron.MenuItemConstructorOptions | Electron.MenuItem)[] = []
-
+app.setName('Dofus Guide')
 // Module
 // ======
 export default (mainWindow: BrowserWindow) => {
   const isDevelopment = process.env.NODE_ENV === 'development'
   if (process.platform === 'darwin') {
     // OS X
-    const name = 'electron-nuxt3'
     template.unshift({
-      label: name,
+      label: app.name,
       submenu: [
         {
-          label: 'About ' + name,
+          label: 'About ' + app.name,
           role: 'about'
         },
         {
