@@ -3,7 +3,6 @@
   "author": "Steodec",
   "email": "paul.tedesco@humbrain.com",
   "description": "Dofus guide",
-  "productName": "Dofus Guide",
   "version": "0.0.1",
   "private": true,
   "main": ".output/electron/background.js",

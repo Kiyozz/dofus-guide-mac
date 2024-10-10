@@ -7,7 +7,6 @@ const Platform = builder.Platform
  */
 const options = {
   appId: 'com.humbrain.dofusguide',
-  productName: 'Dofus Guide',
   // protocols: {
   // name: 'Your deeplink',
   // - Don't forget to set `MimeType: "x-scheme-handler/deeplink"` for `linux.desktop` entry!
@@ -24,14 +23,14 @@ const options = {
   ],
 
   // "store" | "normal" | "maximum" - For testing builds, use 'store' to reduce build time significantly.
-  compression: 'maximum',
+  compression: 'store',
   removePackageScripts: true,
 
   nodeGypRebuild: false,
   buildDependenciesFromSource: false,
 
   directories: {
-    output: 'dofus-guide'
+    output: 'build'
   },
   win: {
     // eslint-disable-next-line no-template-curly-in-string
